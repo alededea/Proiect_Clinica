@@ -24,12 +24,6 @@
             @Html.DisplayFor(model => model.Angajat.Prenume)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Angajat.Calificare)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Angajat.Calificare)
-        </dd>
-        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Angajat.DataAngajare)
         </dt>
         <dd class="col-sm-10">
@@ -40,6 +34,24 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Angajat.Adresa)
+        </dd>
+        <dt class="col-sm-2">
+            Calificări
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.Angajat.AngajatCalificari != null)
+            {
+                foreach (var angajatCalificare in Model.Angajat.AngajatCalificari)
+                {
+                    <div>
+                        @angajatCalificare.Calificare.CalificareTip (ID: @angajatCalificare.CalificareID)
+                    </div>
+                }
+            }
+            else
+            {
+                <div>Nu există calificări înregistrate.</div>
+            }
         </dd>
     </dl>
 </div>

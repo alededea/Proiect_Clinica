@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proiect_Clinica.Data;
 
@@ -11,9 +12,10 @@ using Proiect_Clinica.Data;
 namespace Proiect_Clinica.Migrations
 {
     [DbContext(typeof(Proiect_ClinicaContext))]
-    partial class Proiect_ClinicaContextModelSnapshot : ModelSnapshot
+    [Migration("20231215114317_RemoveCalificare")]
+    partial class RemoveCalificare
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

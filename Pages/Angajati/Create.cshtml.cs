@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Proiect_Clinica.Data;
 using Proiect_Clinica.Models;
 
@@ -32,28 +32,32 @@ namespace Proiect_Clinica.Pages.Angajati
 
         public async Task<IActionResult> OnPostAsync(string[] selectedCalificari)
         {
-            var newAngajat = new Angajat();
+            if (string.IsNullOrEmpty(Angajat.Adresa))
+            {
+                // Setează adresa cu o valoare implicită sau arată o eroare
+                Angajat.Adresa = "Adresa implicită"; // sau orice altă valoare adecvată
+            }
 
             if (selectedCalificari != null)
             {
-                newAngajat.AngajatCalificari = new List<AngajatCalificare>();
+                Angajat.AngajatCalificari = new List<AngajatCalificare>();
                 foreach (var cal in selectedCalificari)
                 {
                     var calToAdd = new AngajatCalificare
                     {
                         CalificareID = int.Parse(cal)
                     };
-                    newAngajat.AngajatCalificari.Add(calToAdd);
+                    Angajat.AngajatCalificari.Add(calToAdd);
                 }
             }
 
             if (!ModelState.IsValid)
             {
-                PopulateAssignedCalificare(_context, newAngajat);
+                PopulateAssignedCalificare(_context, Angajat);
                 return Page();
             }
 
-            _context.Angajat.Add(newAngajat);
+            _context.Angajat.Add(Angajat);
             await _context.SaveChangesAsync();
             return RedirectToPage("./Index");
         }

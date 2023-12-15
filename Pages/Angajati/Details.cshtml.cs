@@ -28,6 +28,11 @@ namespace Proiect_Clinica.Pages.Angajati
                 return NotFound();
             }
 
+            Angajat = await _context.Angajat
+            .Include(a => a.AngajatCalificari)
+            .ThenInclude(ac => ac.Calificare)
+            .FirstOrDefaultAsync(m => m.ID == id);
+
             var angajat = await _context.Angajat.FirstOrDefaultAsync(m => m.ID == id);
             if (angajat == null)
             {
