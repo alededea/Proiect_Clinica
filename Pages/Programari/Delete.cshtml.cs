@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Proiect_Clinica.Data;
 using Proiect_Clinica.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace Proiect_Clinica.Pages.Programari
 {
+    [Authorize(Roles = "Admin")]
     public class DeleteModel : PageModel
     {
         private readonly Proiect_Clinica.Data.Proiect_ClinicaContext _context;

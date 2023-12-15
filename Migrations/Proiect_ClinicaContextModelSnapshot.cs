@@ -72,6 +72,42 @@ namespace Proiect_Clinica.Migrations
                     b.ToTable("AngajatCalificare");
                 });
 
+            modelBuilder.Entity("Proiect_Clinica.Models.Animal", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<int>("ClientID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataNastere")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Greutate")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Nume")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rasa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sex")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ClientID");
+
+                    b.ToTable("Animale");
+                });
+
             modelBuilder.Entity("Proiect_Clinica.Models.Calificare", b =>
                 {
                     b.Property<int>("ID")
@@ -186,6 +222,17 @@ namespace Proiect_Clinica.Migrations
                     b.Navigation("Angajat");
 
                     b.Navigation("Calificare");
+                });
+
+            modelBuilder.Entity("Proiect_Clinica.Models.Animal", b =>
+                {
+                    b.HasOne("Proiect_Clinica.Models.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("Proiect_Clinica.Models.Programare", b =>
