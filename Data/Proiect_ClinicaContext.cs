@@ -18,6 +18,9 @@ namespace Proiect_Clinica.Data
 
         public DbSet<Proiect_Clinica.Models.Angajat>? Angajat { get; set; }
         public DbSet<Calificare> Calificare { get; set; }
+        public DbSet<Proiect_Clinica.Models.Client>? Client { get; set; }
+        public DbSet<Proiect_Clinica.Models.Programare>? Programare { get; set; }
+        public DbSet<Animal> Animale { get; set; }
 
     }
 }

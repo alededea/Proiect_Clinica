@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Proiect_Clinica.Data;
 using Proiect_Clinica.Models;
 
-namespace Proiect_Clinica.Pages.Servicii
+namespace Proiect_Clinica.Pages.Clienti
 {
     public class IndexModel : PageModel
     {
@@ -19,22 +19,14 @@ namespace Proiect_Clinica.Pages.Servicii
             _context = context;
         }
 
-        public IList<Serviciu> Serviciu { get; set; } = default!;
+        public IList<Client> Client { get;set; } = default!;
 
-        public string CurrentFilter { get; set; }
-
-        public async Task OnGetAsync(string searchString)
+        public async Task OnGetAsync()
         {
-            CurrentFilter = searchString;
-
-            IQueryable<Serviciu> serviciuIQ = _context.Serviciu.Include(b => b.Angajat);
-
-            if (!String.IsNullOrEmpty(searchString))
+            if (_context.Client != null)
             {
-                serviciuIQ = serviciuIQ.Where(s => s.Nume.Contains(searchString));
+                Client = await _context.Client.ToListAsync();
             }
-
-            Serviciu = await serviciuIQ.ToListAsync();
         }
     }
 }
