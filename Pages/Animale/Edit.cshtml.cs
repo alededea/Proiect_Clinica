@@ -38,7 +38,7 @@ namespace Proiect_Clinica.Pages.Animale
                 return NotFound();
             }
             Animal = animal;
-           ViewData["ClientID"] = new SelectList(_context.Client, "ID", "ID");
+            ViewData["ClientID"] = new SelectList(_context.Client, "ID", "NumeComplet");
             return Page();
         }
 

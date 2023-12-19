@@ -11,7 +11,7 @@ using Proiect_Clinica.Models;
 
 namespace Proiect_Clinica.Pages.Animale
 {
-    [Authorize(Roles = "Admin")]
+
     public class CreateModel : PageModel
     {
         private readonly Proiect_Clinica.Data.Proiect_ClinicaContext _context;
@@ -23,18 +23,18 @@ namespace Proiect_Clinica.Pages.Animale
 
         public IActionResult OnGet()
         {
-        ViewData["ClientID"] = new SelectList(_context.Client, "ID", "ID");
+            ViewData["ClientID"] = new SelectList(_context.Client, "ID", "NumeComplet");
             return Page();
         }
 
         [BindProperty]
         public Animal Animal { get; set; } = default!;
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Animale == null || Animal == null)
+            if (!ModelState.IsValid || _context.Animale == null || Animal == null)
             {
                 return Page();
             }
@@ -44,5 +44,6 @@ namespace Proiect_Clinica.Pages.Animale
 
             return RedirectToPage("./Index");
         }
+
     }
 }

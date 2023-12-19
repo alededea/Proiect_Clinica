@@ -40,7 +40,7 @@ namespace Proiect_Clinica.Pages.Servicii
             }
             Serviciu = serviciu;
             ViewData["AngajatID"] = new SelectList(_context.Set<Angajat>(), "ID",
-"Nume");
+"NumeComplet");
             return Page();
         }
 

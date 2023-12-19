@@ -10,6 +10,15 @@ namespace Proiect_Clinica.Models
         public string Nume { get; set; }
         public string Prenume { get; set; }
 
+        [Display(Name = "Nume Complet")]
+        public string? NumeComplet
+        {
+            get
+            {
+                return Nume + " " + Prenume;
+            }
+        }
+
         [Display(Name = "Data Angajarii")]
 
         [DataType(DataType.Date)]

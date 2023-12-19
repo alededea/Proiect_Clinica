@@ -27,7 +27,7 @@ namespace Proiect_Clinica.Pages.Servicii
         public IActionResult OnGet()
         {
             ViewData["AngajatID"] = new SelectList(_context.Set<Angajat>(), "ID",
-"Nume");
+"NumeComplet");
             return Page();
         }
 

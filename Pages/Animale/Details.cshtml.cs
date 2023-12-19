@@ -19,7 +19,8 @@ namespace Proiect_Clinica.Pages.Animale
             _context = context;
         }
 
-      public Animal Animal { get; set; } = default!; 
+        public Animal Animal { get; set; } = default!;
+        public Client Client { get; set; } = default!; // Adăugăm și informații despre client
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -36,6 +37,8 @@ namespace Proiect_Clinica.Pages.Animale
             else 
             {
                 Animal = animal;
+                // Încarcăm informațiile despre clientul asociat animalului
+                Client = await _context.Client.FirstOrDefaultAsync(c => c.ID == Animal.ClientID);
             }
             return Page();
         }

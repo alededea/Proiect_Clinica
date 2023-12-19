@@ -19,7 +19,8 @@ namespace Proiect_Clinica.Pages.Servicii
             _context = context;
         }
 
-      public Serviciu Serviciu { get; set; } = default!; 
+      public Serviciu Serviciu { get; set; } = default!;
+        public Angajat Angajat { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,16 +29,22 @@ namespace Proiect_Clinica.Pages.Servicii
                 return NotFound();
             }
 
-            var serviciu = await _context.Serviciu.FirstOrDefaultAsync(m => m.ID == id);
-            if (serviciu == null)
+            Serviciu = await _context.Serviciu.FirstOrDefaultAsync(m => m.ID == id);
+
+            if (Serviciu == null)
             {
                 return NotFound();
             }
-            else 
+
+            Angajat = await _context.Angajat.FirstOrDefaultAsync(c => c.ID == Serviciu.AngajatID);
+
+            if (Angajat == null)
             {
-                Serviciu = serviciu;
+                return NotFound();
             }
+
             return Page();
         }
+
     }
 }

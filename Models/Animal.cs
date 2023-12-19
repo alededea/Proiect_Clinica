@@ -1,6 +1,6 @@
-﻿using Proiect_Clinica.Models;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Policy;
 
 namespace Proiect_Clinica.Models
 {
@@ -26,6 +26,6 @@ namespace Proiect_Clinica.Models
         public int ClientID { get; set; }
 
         // Proprietatea de navigare pentru Client
-        public Client Client { get; set; }
+        public Client? Client { get; set; }
     }
 }

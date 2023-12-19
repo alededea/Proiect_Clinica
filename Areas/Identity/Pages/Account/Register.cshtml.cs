@@ -5,10 +5,14 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Metrics;
+using System.Linq;
+using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -54,6 +58,9 @@ namespace Proiect_Clinica.Areas.Identity.Pages.Account
     /// </summary>
 
     [BindProperty]
+        public Client Client { get; set; }
+
+    [BindProperty]
         public InputModel Input { get; set; }
 
         /// <summary>
@@ -83,6 +90,18 @@ namespace Proiect_Clinica.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
+            [Required]
+            [Display(Name = "Nume de familie")]
+            public string Nume { get; set; }
+
+            [Required]
+            [Display(Name = "Prenume")]
+            public string Prenume { get; set; }
+
+            [Required]
+            [Display(Name = "Numar de telefon")]
+            public string Telefon { get; set; }
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -90,7 +109,7 @@ namespace Proiect_Clinica.Areas.Identity.Pages.Account
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Parola")]
             public string Password { get; set; }
 
             /// <summary>
@@ -98,7 +117,7 @@ namespace Proiect_Clinica.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
+            [Display(Name = "Confirma parola")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
         }
@@ -124,6 +143,10 @@ namespace Proiect_Clinica.Areas.Identity.Pages.Account
             var result = await _userManager.CreateAsync(user,
            Input.Password);
             Client.Email = Input.Email;
+            Client.Nume = Input.Nume;
+            Client.Prenume = Input.Prenume;
+            Client.Telefon = Input.Telefon;
+
             _context.Client.Add(Client);
             await _context.SaveChangesAsync();
             if (result.Succeeded)

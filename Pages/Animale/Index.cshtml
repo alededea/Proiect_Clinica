@@ -30,7 +30,7 @@
                 @Html.DisplayNameFor(model => model.Animal[0].Greutate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Animal[0].Client)
+                @Html.DisplayNameFor(model => model.Animal[0].Client.NumeComplet)
             </th>
             <th></th>
         </tr>
@@ -54,7 +54,7 @@
                 @Html.DisplayFor(modelItem => item.Greutate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Client.ID)
+                @Html.DisplayFor(modelItem => item.Client.NumeComplet)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
