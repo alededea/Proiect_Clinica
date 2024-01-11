@@ -19,7 +19,7 @@ namespace Proiect_Clinica.Pages.Programari
             _context = context;
         }
 
-      public Programare Programare { get; set; } = default!; 
+        public Programare Programare { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,16 +28,36 @@ namespace Proiect_Clinica.Pages.Programari
                 return NotFound();
             }
 
-            var programare = await _context.Programare.FirstOrDefaultAsync(m => m.ID == id);
+            var programare = await _context.Programare
+           .Include(p => p.Client)  // Asigurați încărcarea datelor despre client
+           .Include(p => p.Serviciu) // Asigurați încărcarea datelor despre serviciu
+           .FirstOrDefaultAsync(m => m.ID == id);
             if (programare == null)
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 Programare = programare;
             }
             return Page();
+        }
+        public async Task<IActionResult> OnPostAsync(int? id)
+        {
+            if (id == null || _context.Programare == null)
+            {
+                return NotFound();
+            }
+            var programare = await _context.Programare.FindAsync(id);
+
+            if (programare != null)
+            {
+                Programare = programare;
+                _context.Programare.Remove(Programare);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToPage("./Index");
         }
     }
 }
